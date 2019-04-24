@@ -47,23 +47,32 @@ public class MybatisConfigurer {
      * 创建数据源(数据源的名称：方法名可以取为XXXDataSource(),XXX为数据库名称,该名称也就是数据源的名称)
      */
     @Bean
-    public DataSource newsDbDataSource() {
+    @ConfigurationProperties(prefix = "news.datasource")
+    public DataSource newsDbDataSource() throws Exception {
         System.out.println(url);
+        System.out.println(env.getProperty("news.datasource.url"));
         System.out.println("******************************************开始创建++++++++++++++++++++++++++++++++++");
-        DataSource build = DataSourceBuilder.create()
-                .driverClassName(env.getProperty("news.datasource.driver-class-name"))
-                .url(env.getProperty("news.datasource.url"))
-                .username(env.getProperty("news.datasource.username"))
-                .password(env.getProperty("news.datasource.password")).build();
-        return build;
+//        DataSource build = DataSourceBuilder.create()
+//                .driverClassName(env.getProperty("news.datasource.driver-class-name"))
+//                .url(env.getProperty("news.datasource.url"))
+//                .username(env.getProperty("news.datasource.username"))
+//                .password(env.getProperty("news.datasource.password")).build();
+        return  DataSourceBuilder.create().build();
+
+//        Properties props = new Properties();
+//        props.put("driverClassName", env.getProperty("news.datasource.driver-class-name"));
+//        props.put("url", env.getProperty("news.datasource.url"));
+//        props.put("username", env.getProperty("news.datasource.username"));
+//        props.put("password", env.getProperty("news.datasource.password"));
+//        return DruidDataSourceFactory.createDataSource(props);
     }
 
-//    @Bean(name = "userDataSource")
-//    @ConfigurationProperties(prefix = "user.datasource")
-//    public DataSource userDataSource() {
-//        System.out.println("******************************************开始创建++++++++++++++++++++++++++++++++++");
-//        return DataSourceBuilder.create().build();
-//    }
+    @Bean(name = "userDataSource")
+    @ConfigurationProperties(prefix = "user.datasource")
+    public DataSource userDataSource() {
+        System.out.println("******************************************开始创建++++++++++++++++++++++++++++++++++");
+        return DataSourceBuilder.create().build();
+    }
 
     /**
      * @Primary 该注解表示在同一个接口有多个实现类可以注入的时候，默认选择哪一个，而不是让@autowire注解报错
@@ -71,11 +80,10 @@ public class MybatisConfigurer {
      */
     @Bean
     @Primary
-//    @Qualifier("userDataSource") DataSource userdb
-    public DynamicDataSource dataSource(@Qualifier("newsDbDataSource") DataSource newsdb) {
+    public DynamicDataSource dataSource(@Qualifier("newsDbDataSource") DataSource newsdb,@Qualifier("userDataSource") DataSource userdb) {
         Map<Object, Object> targetDataSources = new HashMap<>();
         targetDataSources.put(DatabaseType.newsdb, newsdb);
-//        targetDataSources.put(DatabaseType.userdb, userdb);
+        targetDataSources.put(DatabaseType.userdb, userdb);
 
         DynamicDataSource dataSource = new DynamicDataSource();
         // 该方法是AbstractRoutingDataSource的方法
@@ -97,7 +105,7 @@ public class MybatisConfigurer {
          //下边两句仅仅用于*.xml文件，如果整个持久层操作不需要使用到xml文件的话（只用注解就可以搞定），则不加
 //        fb.setTypeAliasesPackage("com.hengan.news.dao.*");// 指定基包
         //指定xml位置
-        fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapperLocations")));
+//        fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapperLocations")));
 
         return fb.getObject();
     }
@@ -135,21 +143,21 @@ public class MybatisConfigurer {
 //        return factory.getObject();
 //    }
 
-    @Bean
-    public MapperScannerConfigurer mapperScannerConfigurer() {
-        MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-        mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactoryBean");
-        mapperScannerConfigurer.setBasePackage(MAPPER_PACKAGE);
-
-        //配置通用Mapper，详情请查阅官方文档
-        Properties properties = new Properties();
-        properties.setProperty("mappers", MAPPER_INTERFACE_REFERENCE);
-        properties.setProperty("notEmpty", "false");//insert、update是否判断字符串类型!='' 即 test="str != null"表达式内是否追加 and str != ''
-        properties.setProperty("IDENTITY", "MYSQL");
-        mapperScannerConfigurer.setProperties(properties);
-
-        return mapperScannerConfigurer;
-    }
+//    @Bean
+//    public MapperScannerConfigurer mapperScannerConfigurer() {
+//        MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
+//        mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactoryBean");
+//        mapperScannerConfigurer.setBasePackage(MAPPER_PACKAGE);
+//
+//        //配置通用Mapper，详情请查阅官方文档
+//        Properties properties = new Properties();
+//        properties.setProperty("mappers", MAPPER_INTERFACE_REFERENCE);
+//        properties.setProperty("notEmpty", "false");//insert、update是否判断字符串类型!='' 即 test="str != null"表达式内是否追加 and str != ''
+//        properties.setProperty("IDENTITY", "MYSQL");
+//        mapperScannerConfigurer.setProperties(properties);
+//
+//        return mapperScannerConfigurer;
+//    }
 
 }
 
