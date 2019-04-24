@@ -22,6 +22,7 @@ import java.sql.Timestamp;
 @Service
 @Transactional
 public class NewsServiceImpl extends AbstractService<News> implements NewsService {
+
     @Resource
     private NewsMapper newsMapper;
     @Resource

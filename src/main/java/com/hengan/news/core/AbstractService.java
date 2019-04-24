@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class AbstractService<T> implements Service<T> {
 
     @Autowired
-    protected Mapper<T> mapper;
+    protected MyMapper<T> myMapper;
 
     private Class<T> modelClass;    // 当前泛型真实类型的Class
 
@@ -26,31 +26,31 @@ public abstract class AbstractService<T> implements Service<T> {
 
     @Override
     public void save(T model) {
-        mapper.insertSelective(model);
+        myMapper.insertSelective(model);
     }
 
     @Override
     public void save(List<T> models) {
-        mapper.insertList(models);
+        myMapper.insertList(models);
     }
 
     @Override
     public void deleteById(Integer id) {
-        mapper.deleteByPrimaryKey(id);
+        myMapper.deleteByPrimaryKey(id);
     }
 
     @Override
     public void deleteByIds(String ids) {
-        mapper.deleteByIds(ids);
+        myMapper.deleteByIds(ids);
     }
 
     @Override
     public void update(T model) {
-        mapper.updateByPrimaryKeySelective(model);
+        myMapper.updateByPrimaryKeySelective(model);
     }
 
     public T findById(Long id) {
-        return mapper.selectByPrimaryKey(id);
+        return myMapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -60,7 +60,7 @@ public abstract class AbstractService<T> implements Service<T> {
             Field field = modelClass.getDeclaredField(fieldName);
             field.setAccessible(true);
             field.set(model, value);
-            return mapper.selectOne(model);
+            return myMapper.selectOne(model);
         } catch (ReflectiveOperationException e) {
             throw new ServiceException(e.getMessage(), e);
         }
@@ -68,16 +68,16 @@ public abstract class AbstractService<T> implements Service<T> {
 
     @Override
     public List<T> findByIds(String ids) {
-        return mapper.selectByIds(ids);
+        return myMapper.selectByIds(ids);
     }
 
     @Override
     public List<T> findByCondition(Condition condition) {
-        return mapper.selectByCondition(condition);
+        return myMapper.selectByCondition(condition);
     }
 
     @Override
     public List<T> findAll() {
-        return mapper.selectAll();
+        return myMapper.selectAll();
     }
 }
