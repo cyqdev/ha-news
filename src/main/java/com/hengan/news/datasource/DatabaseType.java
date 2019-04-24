@@ -7,5 +7,12 @@ package com.hengan.news.datasource;
  * 2）DatabaseType中的变量名称就是数据库的名称
  */
 public enum DatabaseType {
-    newsdb,userdb
+    /**
+     * 新闻数据源
+     */
+    newsdb,
+    /**
+     * 用户数据源
+     */
+    userdb
 }

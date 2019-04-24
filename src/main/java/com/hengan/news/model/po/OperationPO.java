@@ -8,8 +8,11 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 
+/**
+ * @author cyq
+ */
 @Table(name = "tb_operation")
-public class Operation {
+public class OperationPO {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY )

@@ -1,15 +1,16 @@
 package com.hengan.news.web;
+
+import com.github.pagehelper.PageInfo;
 import com.hengan.news.core.Result;
 import com.hengan.news.core.ResultGenerator;
 import com.hengan.news.dao.NewsMapper;
-import com.hengan.news.model.po.News;
+import com.hengan.news.model.po.NewsPO;
 import com.hengan.news.model.vo.NewsVO;
 import com.hengan.news.service.NewsService;
-import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -18,9 +19,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/news")
 public class NewsController {
-    @Resource
+
+    @Autowired
     private NewsService newsService;
-    @Resource
+    @Autowired
     private NewsMapper newsMapper;
 
 //    @PostMapping("/add")
@@ -52,7 +54,7 @@ public class NewsController {
     @RequestMapping(value = "list", method = RequestMethod.POST)
     public Result list(@RequestBody(required = false) NewsVO newsVO) {
 //        PageHelper.startPage(1, 10);
-        List<News> news = newsMapper.selectPage1(newsVO);
+        List<NewsPO> news = newsMapper.selectPage1(newsVO);
         PageInfo pageInfo = new PageInfo(news);
         return ResultGenerator.genSuccessResult(pageInfo);
     }

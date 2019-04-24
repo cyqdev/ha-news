@@ -1,17 +1,17 @@
 package com.hengan.news.service.impl;
 
+import com.hengan.news.core.AbstractService;
 import com.hengan.news.dao.NewsMapper;
 import com.hengan.news.dao.OperationMapper;
-import com.hengan.news.model.po.News;
-import com.hengan.news.model.po.Operation;
+import com.hengan.news.model.po.NewsPO;
+import com.hengan.news.model.po.OperationPO;
 import com.hengan.news.model.vo.NewsVO;
 import com.hengan.news.service.NewsService;
-import com.hengan.news.core.AbstractService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 
@@ -21,22 +21,22 @@ import java.sql.Timestamp;
  */
 @Service
 @Transactional
-public class NewsServiceImpl extends AbstractService<News> implements NewsService {
+public class NewsServiceImpl extends AbstractService<NewsPO> implements NewsService {
 
-    @Resource
+    @Autowired
     private NewsMapper newsMapper;
-    @Resource
+    @Autowired
     private OperationMapper operationMapper;
 
     @Override
     public NewsVO detail(Long id) {
-        News news = newsMapper.selectByPrimaryKey(id);
+        NewsPO news = newsMapper.selectByPrimaryKey(id);
         NewsVO newsVO = new NewsVO();
         if(news!=null){
             BeanUtils.copyProperties(news,newsVO);
-            Operation operation = new Operation();
+            OperationPO operation = new OperationPO();
             operation.setNewsId(String.valueOf(news.getId()));
-            Operation one = operationMapper.selectOne(operation);
+            OperationPO one = operationMapper.selectOne(operation);
             if(one!=null){
                 one.setClickNum(one.getClickNum().add(new BigInteger("1")));
                 one.setUpdateTime(new Timestamp(System.currentTimeMillis()));

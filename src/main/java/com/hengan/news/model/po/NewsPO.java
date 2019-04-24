@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Table(name = "hanews")
-public class News  {
+public class NewsPO  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
