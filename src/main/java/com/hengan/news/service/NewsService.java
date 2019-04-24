@@ -1,0 +1,13 @@
+package com.hengan.news.service;
+import com.hengan.news.model.po.News;
+import com.hengan.news.core.Service;
+import com.hengan.news.model.vo.NewsVO;
+
+
+/**
+ * Created by cyq on 2019/02/12.
+ */
+public interface NewsService extends Service<News> {
+
+     NewsVO detail(Long id);
+}
