@@ -1,5 +1,6 @@
 package com.hengan.news.configurer;
 
+import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.hengan.news.datasource.DatabaseType;
 import com.hengan.news.datasource.DynamicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,15 +15,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import static com.hengan.news.core.ProjectConstant.MAPPER_INTERFACE_REFERENCE;
-import static com.hengan.news.core.ProjectConstant.MAPPER_PACKAGE;
 import static com.hengan.news.core.ProjectConstant.MODEL_PACKAGE;
 
 /**
@@ -32,41 +30,55 @@ import static com.hengan.news.core.ProjectConstant.MODEL_PACKAGE;
 //@MapperScan(basePackages = "com.hengan.news.dao")
 public class MybatisConfigurer {
 
-//    @Autowired
-//    private Environment env;
+    @Autowired
+    private Environment env;
 
     @Value("${datasource.news.url}")
     private String url;
+
 
     /**
      * 创建数据源(数据源的名称：方法名可以取为XXXDataSource(),XXX为数据库名称,该名称也就是数据源的名称)
      */
     @Bean
     @ConfigurationProperties(prefix = "datasource.news")
-    public DataSource newsDbDataSource() {
-        System.out.println(url);
-//        System.out.println(env.getProperty("datasource.news.url"));
-        System.out.println("******************************************开始创建++++++++++++++++++++++++++++++++++");
-//        DataSource build = DataSourceBuilder.create()
-//                .driverClassName(env.getProperty("news.datasource.driver-class-name"))
-//                .url(env.getProperty("news.datasource.url"))
-//                .username(env.getProperty("news.datasource.username"))
-//                .password(env.getProperty("news.datasource.password")).build();
-        return  DataSourceBuilder.create().build();
+    public DataSource newsDbDataSource() throws Exception {
 
-//        Properties props = new Properties();
-//        props.put("driverClassName", env.getProperty("news.datasource.driver-class-name"));
-//        props.put("url", env.getProperty("news.datasource.url"));
-//        props.put("username", env.getProperty("news.datasource.username"));
-//        props.put("password", env.getProperty("news.datasource.password"));
-//        return DruidDataSourceFactory.createDataSource(props);
+        //方式一：
+        //DataSource build = DataSourceBuilder.create()
+        //.driverClassName(env.getProperty("datasource.news.driver-class-name"))
+        //.url(env.getProperty("datasource.news.url"))
+        //.username(env.getProperty("datasource.news.username"))
+        //.password(env.getProperty("datasource.news.password")).build();
+        //return build;
+
+        /**
+         *  方式二：
+         *      DataSourceBuilder.create().build();
+         */
+
+        //方式三：
+
+        Properties props = new Properties();
+        props.put("driverClassName", env.getProperty("datasource.news.driver-class-name"));
+        props.put("url", env.getProperty("datasource.news.url"));
+        props.put("username", env.getProperty("datasource.news.username"));
+        props.put("password", env.getProperty("datasource.news.password"));
+        return DruidDataSourceFactory.createDataSource(props);
+
     }
 
     @Bean(name = "userDataSource")
     @ConfigurationProperties(prefix = "datasource.user")
     public DataSource userDataSource() {
-        System.out.println("******************************************开始创建++++++++++++++++++++++++++++++++++");
-        return DataSourceBuilder.create().build();
+        DataSource build = DataSourceBuilder.create()
+                .driverClassName(env.getProperty("datasource.user.driver-class-name"))
+                .url(env.getProperty("datasource.user.url"))
+                .username(env.getProperty("datasource.user.username"))
+                .password(env.getProperty("datasource.user.password")).build();
+        return build;
+
+//        return DataSourceBuilder.create().build();
     }
 
     /**

@@ -25,23 +25,6 @@ public class NewsController {
     @Autowired
     private NewsMapper newsMapper;
 
-//    @PostMapping("/add")
-//    public Result add(News news) {
-//        newsService.save(news);
-//        return ResultGenerator.genSuccessResult();
-//    }
-//
-//    @PostMapping("/delete")
-//    public Result delete(@RequestParam Integer id) {
-//        newsService.deleteById(id);
-//        return ResultGenerator.genSuccessResult();
-//    }
-
-//    @PostMapping("/update")
-//    public Result update(News news) {
-//        newsService.update(news);
-//        return ResultGenerator.genSuccessResult();
-//    }
 
     @ApiOperation(value="获取新闻详情", notes="获取新闻详情")
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)

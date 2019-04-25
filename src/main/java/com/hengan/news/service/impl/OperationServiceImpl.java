@@ -1,6 +1,5 @@
 package com.hengan.news.service.impl;
 
-import com.hengan.news.core.AbstractService;
 import com.hengan.news.dao.OperationMapper;
 import com.hengan.news.model.po.OperationPO;
 import com.hengan.news.service.OperationService;
@@ -15,7 +14,7 @@ import javax.annotation.Resource;
  */
 @Service
 @Transactional
-public class OperationServiceImpl extends AbstractService<OperationPO> implements OperationService {
+public class OperationServiceImpl implements OperationService {
     @Resource
     private OperationMapper operationMapper;
 

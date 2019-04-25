@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
 public interface NewsMapper extends MyMapper<NewsPO> {
     List<NewsPO> selectPage1(NewsVO newsVO);
 }

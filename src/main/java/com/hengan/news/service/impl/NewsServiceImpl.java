@@ -1,6 +1,5 @@
 package com.hengan.news.service.impl;
 
-import com.hengan.news.core.AbstractService;
 import com.hengan.news.dao.NewsMapper;
 import com.hengan.news.dao.OperationMapper;
 import com.hengan.news.model.po.NewsPO;
@@ -21,7 +20,7 @@ import java.sql.Timestamp;
  */
 @Service
 @Transactional
-public class NewsServiceImpl extends AbstractService<NewsPO> implements NewsService {
+public class NewsServiceImpl implements NewsService {
 
     @Autowired
     private NewsMapper newsMapper;
