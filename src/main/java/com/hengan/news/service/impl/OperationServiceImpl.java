@@ -1,7 +1,6 @@
 package com.hengan.news.service.impl;
 
-import com.hengan.news.dao.OperationMapper;
-import com.hengan.news.model.po.OperationPO;
+import com.hengan.news.mapper.OperationMapper;
 import com.hengan.news.service.OperationService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

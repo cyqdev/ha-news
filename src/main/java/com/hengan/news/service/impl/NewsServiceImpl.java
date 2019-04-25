@@ -1,7 +1,7 @@
 package com.hengan.news.service.impl;
 
-import com.hengan.news.dao.NewsMapper;
-import com.hengan.news.dao.OperationMapper;
+import com.hengan.news.mapper.NewsMapper;
+import com.hengan.news.mapper.OperationMapper;
 import com.hengan.news.model.po.NewsPO;
 import com.hengan.news.model.po.OperationPO;
 import com.hengan.news.model.vo.NewsVO;

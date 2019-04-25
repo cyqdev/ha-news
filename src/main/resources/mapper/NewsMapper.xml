@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hengan.news.dao.NewsMapper">
+<mapper namespace="com.hengan.news.mapper.NewsMapper">
   <resultMap id="BaseResultMap" type="com.hengan.news.model.vo.NewsVO">
     <!--
       WARNING - @mbg.generated

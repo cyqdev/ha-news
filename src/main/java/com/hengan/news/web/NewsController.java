@@ -3,7 +3,7 @@ package com.hengan.news.web;
 import com.github.pagehelper.PageInfo;
 import com.hengan.news.core.Result;
 import com.hengan.news.core.ResultGenerator;
-import com.hengan.news.dao.NewsMapper;
+import com.hengan.news.mapper.NewsMapper;
 import com.hengan.news.model.po.NewsPO;
 import com.hengan.news.model.vo.NewsVO;
 import com.hengan.news.service.NewsService;

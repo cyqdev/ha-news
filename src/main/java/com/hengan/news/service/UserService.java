@@ -1,5 +1,7 @@
 package com.hengan.news.service;
 
+import com.hengan.news.annotation.DS;
+import com.hengan.news.datasource.DatabaseType;
 import com.hengan.news.model.po.UserPO;
 
 
@@ -8,4 +10,7 @@ import com.hengan.news.model.po.UserPO;
  */
 public interface UserService {
 
+    UserPO findByWorkCode(String workCode);
+
+    UserPO wxLogin(String code);
 }

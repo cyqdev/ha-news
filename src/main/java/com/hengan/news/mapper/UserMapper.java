@@ -1,4 +1,4 @@
-package com.hengan.news.dao;
+package com.hengan.news.mapper;
 
 import com.hengan.news.core.MyMapper;
 import com.hengan.news.model.po.NewsPO;
@@ -8,5 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-public interface userMapper extends MyMapper<UserPO> {
+public interface UserMapper extends MyMapper<UserPO> {
+
 }

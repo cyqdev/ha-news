@@ -1,4 +1,4 @@
-package com.hengan.news.dao;
+package com.hengan.news.mapper;
 
 import com.hengan.news.core.MyMapper;
 import com.hengan.news.model.po.OperationPO;
