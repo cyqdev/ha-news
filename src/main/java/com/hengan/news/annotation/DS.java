@@ -1,6 +1,6 @@
 package com.hengan.news.annotation;
 
-import com.hengan.news.datasource.DatabaseType;
+import com.hengan.news.config.datasource.DatabaseType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

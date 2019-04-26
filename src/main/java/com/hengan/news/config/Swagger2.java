@@ -1,4 +1,4 @@
-package com.hengan.news.configurer;
+package com.hengan.news.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,23 +1,22 @@
 package com.hengan.news.dao;
 
 import com.hengan.news.annotation.DS;
-import com.hengan.news.datasource.DatabaseType;
+import com.hengan.news.config.datasource.DatabaseType;
 import com.hengan.news.model.po.NewsPO;
 import com.hengan.news.model.po.UserPO;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
+import com.hengan.news.model.vo.UserVO;
 
 /**
  * @Author Cyq
- * @Date 2019/4/25 10:51
+ * @Date 2019/4/26 14:17
  **/
-@Repository
-public interface UserDAO {
+public interface UserDAO  {
 
     @DS(DatabaseType.userdb)
     UserPO findByWorkCode(String workCode);
 
-//    @DS(DatabaseType.newsdb)
-    NewsPO findNews(String workCode);
+    NewsPO getNew(String code);
+
+    UserVO wxLogin(String code);
+
 }

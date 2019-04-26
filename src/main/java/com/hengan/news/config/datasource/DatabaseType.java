@@ -1,4 +1,4 @@
-package com.hengan.news.datasource;
+package com.hengan.news.config.datasource;
 
 /**
  * 列出所有的数据源key（常用数据库名称来命名）

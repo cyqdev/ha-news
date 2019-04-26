@@ -1,8 +1,8 @@
-package com.hengan.news.configurer;
+package com.hengan.news.config;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
-import com.hengan.news.datasource.DatabaseType;
-import com.hengan.news.datasource.DynamicDataSource;
+import com.hengan.news.config.datasource.DatabaseType;
+import com.hengan.news.config.datasource.DynamicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,6 @@ import static com.hengan.news.core.ProjectConstant.MODEL_PACKAGE;
  * Mybatis & MyMapper & PageHelper 配置
  */
 @Configuration
-//@MapperScan(basePackages = "com.hengan.news.dao")
 public class MybatisConfigurer {
 
     @Autowired

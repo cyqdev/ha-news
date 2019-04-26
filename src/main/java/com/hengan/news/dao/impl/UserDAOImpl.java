@@ -5,15 +5,16 @@ import com.hengan.news.mapper.NewsMapper;
 import com.hengan.news.mapper.UserMapper;
 import com.hengan.news.model.po.NewsPO;
 import com.hengan.news.model.po.UserPO;
+import com.hengan.news.model.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
  * @Author Cyq
- * @Date 2019/4/25 10:51
+ * @Date 2019/4/26 14:17
  **/
 @Repository
-public class UserDAOImpl implements UserDAO {
+public  class UserDAOImpl implements UserDAO {
 
     @Autowired
     private UserMapper userMapper;
@@ -23,15 +24,18 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public UserPO findByWorkCode(String workCode) {
-        UserPO userPO = new UserPO();
-        userPO.setWorkCode(workCode);
-        UserPO userPO1 = userMapper.selectOne(userPO);
-        return userPO1;
+        System.out.println(11111);
+        return userMapper.selectByPrimaryKey("17105223");
     }
 
     @Override
-    public NewsPO findNews(String workCode) {
-        NewsPO news = newsMapper.selectByPrimaryKey("25040");
-        return news;
+    public NewsPO getNew(String code) {
+        System.out.println(22222);
+        return newsMapper.selectByPrimaryKey("25040");
+    }
+
+    @Override
+    public UserVO wxLogin(String code) {
+        return null;
     }
 }

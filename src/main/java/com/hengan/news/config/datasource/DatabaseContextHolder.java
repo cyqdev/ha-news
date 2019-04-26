@@ -1,4 +1,4 @@
-package com.hengan.news.datasource;
+package com.hengan.news.config.datasource;
 
 /**
 * 作用：

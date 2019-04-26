@@ -1,8 +1,8 @@
-package com.hengan.news.configurer;
+package com.hengan.news.config.datasource;
 
 import com.hengan.news.annotation.DS;
-import com.hengan.news.datasource.DatabaseContextHolder;
-import com.hengan.news.datasource.DatabaseType;
+import com.hengan.news.config.datasource.DatabaseContextHolder;
+import com.hengan.news.config.datasource.DatabaseType;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
