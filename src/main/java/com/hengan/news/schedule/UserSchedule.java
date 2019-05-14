@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserSchedule {
 
-    @Scheduled(cron = "0/7000 * * * * ?") // 每7000秒执行一次
+    @Scheduled(fixedRate=1000*60*59*2)//服务器启动时执行一次，之后每隔一个小时59分执行一次
     public void syncAccessToken() {
         getAccessToken();
     }
@@ -20,7 +20,12 @@ public class UserSchedule {
         String accessToken = QYWXUtil.getAccessToken(corpid, corpsecret);
         if(StringUtils.isNotBlank(accessToken)){
             WorkWXAPI.TOKEN = accessToken;
+            System.out.println("已获取accessToken:"+accessToken);
         }
+    }
+
+    public static void main(String[] args) {
+        getAccessToken();
     }
 
 }

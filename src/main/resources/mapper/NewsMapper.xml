@@ -20,7 +20,7 @@
   </resultMap>
 
 
-  <select id="selectPage1" parameterType="com.hengan.news.model.vo.NewsVO" resultMap="BaseResultMap">
+  <select id="selectPage" parameterType="com.hengan.news.model.vo.NewsVO" resultMap="BaseResultMap">
     select
       id,
       title,

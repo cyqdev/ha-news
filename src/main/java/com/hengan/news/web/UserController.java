@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date 2019/4/24 15:08
  **/
 @RestController
-//@RequestMapping("/common/redpack")
 @Api(value = "UserController", description="用户接口")
 public class UserController {
 
@@ -35,10 +34,12 @@ public class UserController {
     }
 
     @ApiOperation(value = "企业微信用户登录", notes = "企业微信用户登录")
-    @GetMapping(value = "/wxlongin", produces = {"application/json;charset=UTF-8"})
-    public Result wxLogin(@RequestParam(name = "code") String code){
+    @GetMapping(value = "/wxlogin")
+//    @ApiImplicitParam(name="code",value="个人code",required=true,dataType="String",paramType="query")
+    public Result<UserVO> wxLogin(@RequestParam(name = "code") String code){
+        System.out.println("开始登陆code:"+code);
         UserVO userVO = userService.wxLogin(code);
-        Result result = new Result();
+        Result<UserVO> result = new Result<>();
         result.setCode(ResultCode.SUCCESS);
         result.setData(userVO);
         return result;

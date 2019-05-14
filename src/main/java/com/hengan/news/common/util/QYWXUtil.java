@@ -3,6 +3,7 @@ package com.hengan.news.common.util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.hengan.news.model.vo.NewsMsgVO;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
@@ -30,9 +31,7 @@ import java.security.KeyStore;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class QYWXUtil {
 
@@ -74,6 +73,17 @@ public class QYWXUtil {
         return detailObj;
     }
 
+    /**
+     * 发送文本消息
+     * @param corpid
+     * @param redirecturi
+     * @param agentid
+     * @param accessToken
+     * @param workCodes
+     * @param title
+     * @param content
+     * @param state
+     */
     public static void pushTextMessage(String corpid, String redirecturi, String agentid, String accessToken, String workCodes, String title,String content,String state){
         String url = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=#access_token";
         url = url.replace("#access_token", accessToken);
@@ -96,6 +106,41 @@ public class QYWXUtil {
         textCardMap.put("url",jumpUrl);
         param.put("textcard",textCardMap);
         GetWeixinHttpRequestByte.post(url, JSON.toJSONString(param));
+    }
+
+    /**
+     * 发送多条图文消息
+     * @param accessToken
+     * @param touser 工号 | 分隔
+     * @param toparty 部门 | 分隔
+     * @param totag 标签 | 分隔
+     * @param agentid
+     * @param mpnewsVOS
+     */
+    public static void sendnNewsMessage(String accessToken, String touser,String toparty,String totag, Integer agentid, List<NewsMsgVO> mpnewsVOS){
+        String url = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=#access_token";
+        url = url.replace("#access_token", accessToken);
+
+        //组装消息
+        JSONObject json = new JSONObject();
+        if(StringUtils.isNotBlank(touser)){
+            json.put("touser", touser);
+        }
+        if(StringUtils.isNotBlank(toparty)){
+            json.put("toparty", toparty);
+        }
+        if(StringUtils.isNotBlank(totag)){
+            json.put("totag", totag);
+        }
+        json.put("msgtype", "news");
+        json.put("agentid", agentid);
+        JSONObject mpnewsJson = new JSONObject();
+        JSONArray array= JSONArray.parseArray(JSON.toJSONString(mpnewsVOS));
+        mpnewsJson.put("articles",array);
+        json.put("news",mpnewsJson);
+//        json.put("safe",0);
+        System.out.println(JSON.toJSONString(json));
+        GetWeixinHttpRequestByte.post(url, JSON.toJSONString(json));
     }
 
     public static void pushSimpleTextMessage(String agentid,String accessToken,String workCodes,String content){

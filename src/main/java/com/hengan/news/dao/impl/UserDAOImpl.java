@@ -2,8 +2,10 @@ package com.hengan.news.dao.impl;
 
 import com.hengan.news.dao.UserDAO;
 import com.hengan.news.mapper.NewsMapper;
+import com.hengan.news.mapper.UserAuthKeyMapper;
 import com.hengan.news.mapper.UserMapper;
 import com.hengan.news.model.po.NewsPO;
+import com.hengan.news.model.po.UserAuthKeyPO;
 import com.hengan.news.model.po.UserPO;
 import com.hengan.news.model.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +16,23 @@ import org.springframework.stereotype.Repository;
  * @Date 2019/4/26 14:17
  **/
 @Repository
-public  class UserDAOImpl implements UserDAO {
+public class UserDAOImpl implements UserDAO {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private UserAuthKeyMapper userAuthKeyMapper;
 
     @Autowired
     private NewsMapper newsMapper;
 
     @Override
     public UserPO findByWorkCode(String workCode) {
-        System.out.println(11111);
-        return userMapper.selectByPrimaryKey("17105223");
+        UserPO user = new UserPO();
+        user.setWorkCode(workCode);
+        UserPO userPO = userMapper.selectOne(user);
+        return userPO;
     }
 
     @Override
@@ -37,5 +44,13 @@ public  class UserDAOImpl implements UserDAO {
     @Override
     public UserVO wxLogin(String code) {
         return null;
+    }
+
+    @Override
+    public UserAuthKeyPO selectUserInfoByAuthKey(String authkey) {
+        UserAuthKeyPO userAuthKeyPO = new UserAuthKeyPO();
+        userAuthKeyPO.setAuthKey(authkey);
+        UserAuthKeyPO userAuthKey = userAuthKeyMapper.selectOne(userAuthKeyPO);
+        return userAuthKey;
     }
 }

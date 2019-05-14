@@ -25,6 +25,12 @@ public class NewsController {
     @Autowired
     private NewsMapper newsMapper;
 
+    @ApiOperation(value="新增新闻", notes="新增新闻")
+    @RequestMapping(value = "/add}", method = RequestMethod.POST)
+    public Result detail(@RequestBody NewsVO newsVO) {
+         newsService.add(newsVO);
+        return ResultGenerator.genSuccessResult();
+    }
 
     @ApiOperation(value="获取新闻详情", notes="获取新闻详情")
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
@@ -37,7 +43,7 @@ public class NewsController {
     @RequestMapping(value = "list", method = RequestMethod.POST)
     public Result list(@RequestBody(required = false) NewsVO newsVO) {
 //        PageHelper.startPage(1, 10);
-        List<NewsPO> news = newsMapper.selectPage1(newsVO);
+        List<NewsPO> news = newsService.selectPage(newsVO);
         PageInfo pageInfo = new PageInfo(news);
         return ResultGenerator.genSuccessResult(pageInfo);
     }

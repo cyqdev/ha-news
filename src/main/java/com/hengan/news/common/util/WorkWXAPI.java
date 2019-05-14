@@ -8,11 +8,20 @@ package com.hengan.news.common.util;
  */
 public class WorkWXAPI {
 
-    public static String CORPID = ""; //企业ID
-    public static Integer AGENTID = 1000017; //应用ID
-    public static String AUTH_APP_SECRET = ""; //应用1Secret
-    public static String CONTACTS_SECRET = ""; //应用2Secret
-    public static String TOKEN = ""; //API接收Token
+    public static String CORPID = "wxbaaa22057237762a"; //企业ID
+
+    public static Integer AGENTID = 1000029; //门店信息维护应用ID
+    public static Integer DATA_AGENTID = 11; //数据中心应用ID
+    public static Integer OPERATION_AGENTID = 19; //运营信息发布应用ID
+
+    public static String AUTH_APP_SECRET = "nHg9aWt5tCMCqSu01WsLVyZ6GHgXS9bWVtggKK0c-xc"; //门店维护应用Secret
+    public static String DATA_SECRET = "pa3taU7I7YFWhu8sHN-EeywCVxbEIvqRklSlfYOtwzg"; //数据中心应用Secret
+    public static String OPERATION_SECRET = "4m4sq7rk87zaippbkFU2_pqyKoxGhDqg4MJFTGLG1Qk"; //运营信息发布应用Secret
+
+    public static String TOKEN = ""; //门店维护API接收Token
+    public static String DATA_TOKEN = ""; //数据中心API接收Token
+    public static String OPERATION_TOKEN = ""; //运营信息发布API接收Token
+
     public static String EncodingAESKey = "";//API接收EncodingAESKey
 
     public static String GET_ACCESS_TOKEN_URL = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=%s&corpsecret=%s";

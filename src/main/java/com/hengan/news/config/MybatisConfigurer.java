@@ -14,14 +14,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import static com.hengan.news.core.ProjectConstant.MODEL_PACKAGE;
+import static com.hengan.news.core.ProjectConstant.*;
 
 /**
  * Mybatis & MyMapper & PageHelper 配置
@@ -51,32 +53,31 @@ public class MybatisConfigurer {
         //.password(env.getProperty("datasource.news.password")).build();
         //return build;
 
-        /**
-         *  方式二：
-         *      DataSourceBuilder.create().build();
-         */
+
+//         方式二：
+          return   DataSourceBuilder.create().build();
+
 
         //方式三：
-
-        Properties props = new Properties();
-        props.put("driverClassName", env.getProperty("datasource.news.driver-class-name"));
-        props.put("url", env.getProperty("datasource.news.url"));
-        props.put("username", env.getProperty("datasource.news.username"));
-        props.put("password", env.getProperty("datasource.news.password"));
-        return DruidDataSourceFactory.createDataSource(props);
+//        Properties props = new Properties();
+//        props.put("driverClassName", env.getProperty("datasource.news.driver-class-name"));
+//        props.put("url", env.getProperty("datasource.news.url"));
+//        props.put("username", env.getProperty("datasource.news.username"));
+//        props.put("password", env.getProperty("datasource.news.password"));
+//        return DruidDataSourceFactory.createDataSource(props);
 
     }
 
     @Bean(name = "userDataSource")
     @ConfigurationProperties(prefix = "datasource.user")
     public DataSource userDataSource() {
-        DataSource build = DataSourceBuilder.create()
-                .driverClassName(env.getProperty("datasource.user.driver-class-name"))
-                .url(env.getProperty("datasource.user.url"))
-                .username(env.getProperty("datasource.user.username"))
-                .password(env.getProperty("datasource.user.password")).build();
-        return build;
-//        return DataSourceBuilder.create().build();
+//        DataSource build = DataSourceBuilder.create()
+//                .driverClassName(env.getProperty("datasource.user.driver-class-name"))
+//                .url(env.getProperty("datasource.user.url"))
+//                .username(env.getProperty("datasource.user.username"))
+//                .password(env.getProperty("datasource.user.password")).build();
+//        return build;
+        return DataSourceBuilder.create().build();
     }
 
     /**
@@ -110,7 +111,7 @@ public class MybatisConfigurer {
         //下边两句仅仅用于*.xml文件，如果整个持久层操作不需要使用到xml文件的话（只用注解就可以搞定），则不加
 //        fb.setTypeAliasesPackage("com.hengan.news.dao.*");// 指定基包
         //指定xml位置
-//        fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapperLocations")));
+        fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapperLocations")));
         return fb.getObject();
     }
 
@@ -151,7 +152,7 @@ public class MybatisConfigurer {
 //    public MapperScannerConfigurer mapperScannerConfigurer() {
 //        MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
 //        mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactoryBean");
-//        mapperScannerConfigurer.setBasePackage(MAPPER_PACKAGE);
+//        mapperScannerConfigurer.setBasePackage(MAPPER_PACKAGE1);
 //        //配置通用Mapper，详情请查阅官方文档
 //        Properties properties = new Properties();
 //        properties.setProperty("mappers", MAPPER_INTERFACE_REFERENCE);
