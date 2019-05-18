@@ -25,7 +25,7 @@ public class SendNewsMsgSchedule {
      * 运营信息发布应用每日推送（根据标签）
      * 标签:日报（全部）tagid: 9
      */
-    @Scheduled(cron = "0 50 7 ? * *")
+    @Scheduled(cron = "0 0 8 ? * *")
     static void SendOperationInfo(){
 
        System.out.println("开始获取accessToken");
@@ -91,7 +91,6 @@ public class SendNewsMsgSchedule {
         //以标签发送  日报（全部）tagid: 9
        QYWXUtil.sendnNewsMessage(accessToken,null,null,"9",WorkWXAPI.OPERATION_AGENTID,list);
    }
-
 
     public static void main(String[] args) {
         //SendOperationInfo();
