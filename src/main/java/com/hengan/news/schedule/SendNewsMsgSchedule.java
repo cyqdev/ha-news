@@ -8,7 +8,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -35,10 +37,18 @@ public class SendNewsMsgSchedule {
            System.out.println("已获取accessToken:"+accessToken);
        }
 
+       SimpleDateFormat format = new SimpleDateFormat("yyyy年M月d日");
+       Calendar c = Calendar.getInstance();
+       c.setTime(new Date());
+       c.add(Calendar.DATE, -1);
+       Date yesterday = c.getTime();
+       String yesterday_str= format.format(yesterday);//前一天
+       System.out.println(yesterday_str);
+
        List<NewsMsgVO> list = new ArrayList<>();
        NewsMsgVO newsMsgVO = new NewsMsgVO();
-       newsMsgVO.setTitle("品类销售收入_"+ DateTimeUtils.getFormatDate(new Date(),DateTimeUtils.PART_DATE_FORMAT_CN));
-       newsMsgVO.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbaaa22057237762a&redirect_uri=http%3a%2f%2ffr.hengan.cn%3a8080%2fWeiXinServer%3fop%3dh5%26formlet%3dhawx%2fyyxxfb%2fQ-FHSRY_WX2.frm&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect");
+       newsMsgVO.setTitle("品类销售收入_"+ yesterday_str);
+       newsMsgVO.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbaaa22057237762a&redirect_uri=http%3a%2f%2ffr.hengan.cn%3a8080%2fWeiXinServer%3fop%3dh5%26formlet%3dhawx%2fyyxxfb%2fQ-FHSRY_WX1.frm&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect");
        newsMsgVO.setPicurl("http://hengan-mall.oss-cn-shenzhen.aliyuncs.com/mall/img/1557817429123.jpg");
        newsMsgVO.setDescription("这是描述1~~~~~~~~~~");
 
@@ -79,12 +89,12 @@ public class SendNewsMsgSchedule {
        list.add(newsMsgVO4);
        list.add(newsMsgVO5);
         //以标签发送  日报（全部）tagid: 9
-       QYWXUtil.sendnNewsMessage(accessToken,null,null,"42",WorkWXAPI.OPERATION_AGENTID,list);
+       QYWXUtil.sendnNewsMessage(accessToken,null,null,"9",WorkWXAPI.OPERATION_AGENTID,list);
    }
 
 
     public static void main(String[] args) {
-        SendOperationInfo();
+        //SendOperationInfo();
 
     }
 
