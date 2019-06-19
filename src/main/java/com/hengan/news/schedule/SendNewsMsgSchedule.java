@@ -77,8 +77,8 @@ public class SendNewsMsgSchedule {
        newsMsgVO4.setDescription("这是描述5~~~~~~~~~~");
 
        NewsMsgVO newsMsgVO5 = new NewsMsgVO();
-       newsMsgVO5.setTitle("成品库存情况（四大品类）");
-       newsMsgVO5.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbaaa22057237762a&redirect_uri=http%3a%2f%2ffr.hengan.cn%3a8080%2fWeiXinServer%3fop%3dh5%26formlet%3dhawx%2fyyxxfb%2fQ-KUCUN_WX.frm&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect");
+       newsMsgVO5.setTitle("库存成品情况");
+       newsMsgVO5.setUrl("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbaaa22057237762a&redirect_uri=http%3a%2f%2ffr.hengan.cn%3a8080%2fWeiXinServer%3fop%3dh5%26formlet%3dhawx%2fyyxxfb%2fQ-PLKC_WX.frm&response_type=code&scope=snsapi_base&state=STATE&connect_redirect=1#wechat_redirect");
        newsMsgVO5.setPicurl("http://hengan-mall.oss-cn-shenzhen.aliyuncs.com/mall/img/1557817503587.jpg");
        newsMsgVO5.setDescription("这是描述6~~~~~~~~~~");
 
@@ -91,7 +91,6 @@ public class SendNewsMsgSchedule {
         //以标签发送  日报（全部）tagid: 9
        QYWXUtil.sendnNewsMessage(accessToken,null,null,"9",WorkWXAPI.OPERATION_AGENTID,list);
    }
-
     public static void main(String[] args) {
         //SendOperationInfo();
 
