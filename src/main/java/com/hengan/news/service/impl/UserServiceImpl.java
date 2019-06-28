@@ -43,10 +43,11 @@ public class UserServiceImpl  implements UserService {
     @Override
     public UserVO wxLogin(String code) {
         UserVO userVO = new UserVO();
-        if(StringUtils.isBlank(WorkWXAPI.TOKEN)){
+        if(StringUtils.isBlank(WorkWXAPI.NEWS_TOKEN)){
             UserSchedule.getAccessToken();
         }
-        JSONObject userInfo = QYWXUtil.getUserInfo(code, WorkWXAPI.TOKEN);
+        System.out.println("开始获取用户信息###code:" + code + "  -------token:" + WorkWXAPI.NEWS_TOKEN);
+        JSONObject userInfo = QYWXUtil.getUserInfo(code, WorkWXAPI.NEWS_TOKEN);
         System.out.println("获取到用户信息json:"+userInfo);
         String workCode = "";
         try{

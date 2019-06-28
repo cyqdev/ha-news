@@ -16,10 +16,10 @@ public class UserSchedule {
     public static void getAccessToken(){
         System.out.println("开始获取accessToken");
         String corpid = WorkWXAPI.CORPID;
-        String corpsecret = WorkWXAPI.AUTH_APP_SECRET;
+        String corpsecret = WorkWXAPI.NEWS_SECRET;
         String accessToken = QYWXUtil.getAccessToken(corpid, corpsecret);
         if(StringUtils.isNotBlank(accessToken)){
-            WorkWXAPI.TOKEN = accessToken;
+            WorkWXAPI.NEWS_TOKEN = accessToken;
             System.out.println("已获取accessToken:"+accessToken);
         }
     }
