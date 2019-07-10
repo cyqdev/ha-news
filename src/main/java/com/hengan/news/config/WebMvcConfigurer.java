@@ -143,7 +143,7 @@ public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
 //            });
 //        }
 
-        registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns("/wxlogin","/static/**", "/resoures/**", "/swagger-resources/**","/v2/api-docs","/webjars/**","/swagger-ui.html");
+        registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns("/test/a","/wxlogin","/static/**", "/resoures/**", "/swagger-resources/**","/v2/api-docs","/webjars/**","/swagger-ui.html");
 
     }
 

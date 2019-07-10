@@ -57,8 +57,8 @@ public class QYWXUtil {
 
     public static JSONObject getUserInfo(String code, String accessToken){
         String url = "https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=#access_token&code=#code";
-        url = url.replace("#code",code);
-        url = url.replace("#access_token", accessToken);
+        url = url.replace("#code",code).replace("#access_token", accessToken);
+        System.out.println("获取useriId的URL：" + url);
         JSONObject obj = JSON.parseObject(GetWeixinHttpRequestByte.get(url));
         return obj;
     }

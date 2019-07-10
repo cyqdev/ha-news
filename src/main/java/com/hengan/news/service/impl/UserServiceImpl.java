@@ -46,7 +46,7 @@ public class UserServiceImpl  implements UserService {
         if(StringUtils.isBlank(WorkWXAPI.NEWS_TOKEN)){
             UserSchedule.getAccessToken();
         }
-        System.out.println("开始获取用户信息###code:" + code + "  -------token:" + WorkWXAPI.NEWS_TOKEN);
+//        System.out.println("开始获取用户信息###code:" + code + "  -------token:" + WorkWXAPI.NEWS_TOKEN);
         JSONObject userInfo = QYWXUtil.getUserInfo(code, WorkWXAPI.NEWS_TOKEN);
         System.out.println("获取到用户信息json:"+userInfo);
         String workCode = "";
