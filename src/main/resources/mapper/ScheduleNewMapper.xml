@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hengan.news.mapper.ScheduleNewMapper">
+
+  <select id="getAllSchedulePlan"  resultType="com.hengan.news.model.po.ScheduleNewPO">
+          SELECT
+          sum( a.new_open_flag ) newOpenFlag,
+          a.app_agentid appAgentid,
+          a.corn_expression cornExpression
+      FROM
+          tb_schedule_new a
+      where
+           a.mark_for_delete = '0'
+      GROUP BY
+          a.app_agentid,
+          a.corn_expression
+      order by  a.app_agentid,a.corn_expression
+  </select>
+
+
+
+</mapper>
