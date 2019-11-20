@@ -31,7 +31,7 @@ public class SendNewsMsgSchedule {
      * 运营信息发布应用每日推送（根据标签）
      * 标签:日报（全部）tagid: 9
      */
-    @Scheduled(cron = "0 0 8 ? * *")
+    //@Scheduled(cron = "0 0 8 ? * *")
     public void sendMessage() {
         SendOperationInfo(Constant.APP_CODE.SJZX);
         SendOperationInfo(Constant.APP_CODE.YYXXFB);
