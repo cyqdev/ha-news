@@ -35,7 +35,7 @@ public class SendNewsMsgNewSchedule {
     private Scheduler scheduler;
 
 
-    @Scheduled(fixedDelay = 1000*60*10)
+    @Scheduled(fixedDelay = 1000*60*60)
     public void sendMessage() {
         System.out.println("开始执行这个定时了=========");
         //获取定时表中的所有数据
