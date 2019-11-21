@@ -140,7 +140,8 @@ public class QYWXUtil {
         json.put("news",mpnewsJson);
 //        json.put("safe",0);
         System.out.println(JSON.toJSONString(json));
-        GetWeixinHttpRequestByte.post(url, JSON.toJSONString(json));
+        System.out.println( GetWeixinHttpRequestByte.post(url, JSON.toJSONString(json)));
+
     }
 
     public static void pushSimpleTextMessage(String agentid,String accessToken,String workCodes,String content){
