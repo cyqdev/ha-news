@@ -16,7 +16,15 @@ public class WxSendMsgJob extends QuartzJobBean {
     protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
         JobDataMap jobDataMap = context.getMergedJobDataMap();
 
-        QYWXUtil.sendnNewsMessage(jobDataMap.getString("accessToken"), jobDataMap.getString("touser"), jobDataMap.getString("toparty"), jobDataMap.getString("totag"), jobDataMap.getInt("agentid"), (List<NewsMsgVO>) jobDataMap.get("mpnewsVOS"));
+        //先获取
+        String corpid = WorkWXAPI.CORPID;
+        String appSecret = jobDataMap.getString("appSecret");
+        String accessToken = QYWXUtil.getAccessToken(corpid, appSecret);
+        if (accessToken == null || "".equals(accessToken)) {
+            throw new JobExecutionException();
+        }
+
+        QYWXUtil.sendnNewsMessage(accessToken, jobDataMap.getString("touser"), jobDataMap.getString("toparty"), jobDataMap.getString("totag"), jobDataMap.getInt("agentid"), (List<NewsMsgVO>) jobDataMap.get("mpnewsVOS"));
 
     }
 }

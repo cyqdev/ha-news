@@ -25,16 +25,9 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public void addJob(ScheduleBean scheduleBean, ScheduleNewPO scheduleNewPO, List<NewsMsgVO> newsMsgVOList) {
         try {
-            //先获取acess_token
-            String corpid = WorkWXAPI.CORPID;
-            String corpsecret = scheduleNewPO.getAppSecret();
-            String accessToken = QYWXUtil.getAccessToken(corpid, corpsecret);
-            if (accessToken == null || "".equals(accessToken)) {
-                throw new Exception();
-            }
             //放置参数
             JobDataMap jobDataMap = new JobDataMap();
-            jobDataMap.put("accessToken", accessToken);
+            jobDataMap.put("appSecret", scheduleNewPO.getAppSecret());
             jobDataMap.put("touser", scheduleNewPO.getTouser());
             jobDataMap.put("toparty", scheduleNewPO.getToparty());
             jobDataMap.put("totag", scheduleNewPO.getTotag());
