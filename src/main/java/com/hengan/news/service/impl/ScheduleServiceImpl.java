@@ -33,6 +33,8 @@ public class ScheduleServiceImpl implements ScheduleService {
             jobDataMap.put("totag", scheduleNewPO.getTotag());
             jobDataMap.put("agentid", scheduleNewPO.getAppAgentid());
             jobDataMap.put("mpnewsVOS", newsMsgVOList);
+            jobDataMap.put("showDate", scheduleNewPO.getShowDate());
+            jobDataMap.put("title",scheduleNewPO.getTitle());
 
             JobDetail jobDetail = JobBuilder.newJob(WxSendMsgJob.class).setJobData(jobDataMap)
                     .withIdentity(scheduleBean.getJobName(), scheduleBean.getJobGroup())

@@ -139,24 +139,27 @@ public class SendNewsMsgNewSchedule {
                 scheduleNewPO.setTotag(po.getTotag());
                 scheduleNewPO.setAppAgentid(po.getAppAgentid());
                 scheduleNewPO.setCornExpression(po.getCornExpression());
+                scheduleNewPO.setShowDate(po.getShowDate());
+                scheduleNewPO.setTitle(po.getTitle());
+                //newsMsgVO.setTitle(po.getTitle());
 
-
-                if(po.getShowDate()==null||"".equals(po.getShowDate())){
-                    newsMsgVO.setTitle(po.getTitle());
-                }else{
-                    try {
-                        SimpleDateFormat format = new SimpleDateFormat("yyyy年M月d日");
-                        Calendar c = Calendar.getInstance();
-                        c.setTime(new Date());
-                        c.add(Calendar.DATE, Integer.parseInt(po.getShowDate()));
-                        String dateStr = format.format(c.getTime());
-                        newsMsgVO.setTitle(po.getTitle() + "_" + dateStr);
-                    }catch (Exception e){
-                        e.printStackTrace();
-                        newsMsgVO.setTitle(po.getTitle());
-                    }
-
-                }
+//                if(po.getShowDate()==null||"".equals(po.getShowDate())){
+//                    scheduleNewPO.setShowDate("0");
+//                    newsMsgVO.setTitle(po.getTitle());
+//                }else{
+//                    try {
+//                        SimpleDateFormat format = new SimpleDateFormat("yyyy年M月d日");
+//                        Calendar c = Calendar.getInstance();
+//                        c.setTime(new Date());
+//                        c.add(Calendar.DATE, Integer.parseInt(po.getShowDate()));
+//                        String dateStr = format.format(c.getTime());
+//                        newsMsgVO.setTitle(po.getTitle() + "_" + dateStr);
+//                    }catch (Exception e){
+//                        e.printStackTrace();
+//                        newsMsgVO.setTitle(po.getTitle());
+//                    }
+//
+//                }
 
             }
             newsMsgVOList.add(newsMsgVO);
